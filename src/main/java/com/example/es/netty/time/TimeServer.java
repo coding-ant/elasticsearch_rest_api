@@ -1,4 +1,4 @@
-package com.example.es.netty;
+package com.example.es.netty.time;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -19,7 +19,7 @@ public class TimeServer {
         b.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG,2014)
-                .childHandler(new ChiildChannelHandler());
+                .childHandler(new ChildChannelHandler());
         try {
             ChannelFuture f = b.bind(port).sync();
             f.channel().closeFuture().sync();
@@ -29,6 +29,12 @@ public class TimeServer {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }
+
+    }
+
+    public static void main(String[] args){
+        int port = 8080;
+        new TimeServer().bind(port);
 
     }
 }

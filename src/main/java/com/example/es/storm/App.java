@@ -41,8 +41,8 @@ public class App {
         //builder.setBolt(SPLIT_BOLT_ID, splitBolt).shuffleGrouping(SENTENCE_SPOUT_ID);
 
         //SplitSentenceBolt单词分割器设置4个Task，2个Executeor(线程)
-        builder.setBolt(SPLIT_BOLT_ID, splitBolt,2).setNumTasks(4).shuffleGrouping(SENTENCE_SPOUT_ID);
-
+       // builder.setBolt(SPLIT_BOLT_ID, splitBolt,2).setNumTasks(4).shuffleGrouping(SENTENCE_SPOUT_ID);
+        builder.setBolt(SPLIT_BOLT_ID, splitBolt,2).shuffleGrouping(SENTENCE_SPOUT_ID);
         // SplitSentenceBolt --> WordCountBolt
 
         //fieldsGrouping将含有特定数据的tuple路由到特殊的bolt实例中
@@ -59,6 +59,7 @@ public class App {
 
 
         Config config = new Config();//Config类是一个HashMap<String,Object>的子类，用来配置topology运行时的行为
+        config.setDebug(false);
         //设置worker数量
         //config.setNumWorkers(2);
         LocalCluster cluster = new LocalCluster();
