@@ -1,5 +1,7 @@
 package com.example.es.thread;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -41,6 +43,7 @@ public class CountDownLatchDemo {
             countDownLatch.await();
             System.out.println("2个子线程已经执行完毕");
             System.out.println("继续执行主线程");
+            System.out.println(Runtime.getRuntime().availableProcessors());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
